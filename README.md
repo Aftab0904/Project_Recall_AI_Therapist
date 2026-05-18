@@ -191,9 +191,73 @@ flowchart TD
 
 ---
 
-## Demo Flow
-1. Reset Demo: POST /api/demo/reset (Clears DBs)
-2. Ingest Samples: POST /api/ingest (Ingests 5 simulated sessions)
-3. Start Session: POST /api/session/start (Retrieves memories and generates warm opener)
-4. View Memories: GET /api/memories/demo_user (Transparency panel)
-5. Forget Memory: POST /api/memories/exclude (User-controlled deletion)
+## Known Limitations
+
+This is a working prototype for a technical case study, not a production mental health product.
+
+Current limitations:
+
+1. The sessions used in the demo are simulated, not real user conversations.
+2. The memory extraction quality depends on the selected LLM provider.
+3. The safety classification is intentionally simple and would need clinical review before real deployment.
+4. The system does not include real authentication, user accounts, or role-based access control.
+5. The notification engine does not connect to a real push notification provider.
+6. The ChromaDB vector store is local and not configured for production scale.
+7. The SQLite database is suitable for the prototype but would need to be replaced or migrated for production.
+8. The frontend is designed for demo clarity, not as a full therapy product.
+9. The project does not implement a complete crisis escalation workflow.
+10. The system does not provide medical advice, diagnosis, or treatment.
+11. The prototype does not deeply handle multilingual sessions.
+12. The evaluation is mostly functional; it does not yet include clinical safety evaluation or large-scale user testing.
+
+---
+
+## What I Would Build With 2 More Weeks
+
+With more time, I would focus less on adding flashy features and more on making the memory system safer, easier to evaluate, and closer to production quality.
+
+### 1. Stronger memory evaluation
+
+I would create a small evaluation dataset with expected memory outputs and score each run on:
+
+- whether the extracted memory is relevant
+- whether sensitive details are handled correctly
+- whether the memory should be stored at all
+- whether it is safe to reference later
+- whether the generated opener sounds warm and natural
+
+This would make it easier to compare prompts, models, and retrieval settings.
+
+### 2. Human review for sensitive memories
+
+For a real mental health product, high-sensitivity memory behavior should not be shipped based only on developer judgment.
+
+I would add a review workflow where clinical or safety reviewers can inspect:
+
+- high-sensitivity memory categories
+- notification copy
+- unsafe retrieval examples
+- false positives and false negatives from the safety filter
+
+### 3. Better user control over memory
+
+The current prototype supports viewing and forgetting memories.
+
+I would extend this into a fuller memory control panel where users can:
+
+- edit a memory
+- pause a memory
+- mark a memory as private
+- decide which topics the AI is allowed to remember
+- see why a memory was used in a session opener
+
+### 4. Graph-based memory relationships
+
+Right now, memories are mostly independent records.
+
+I would add a graph layer that connects related themes, goals, and coping strategies.
+
+Example:
+
+```text
+work meetings -> anxiety -> overcommitting -> boundary-setting goal -> coping plan
