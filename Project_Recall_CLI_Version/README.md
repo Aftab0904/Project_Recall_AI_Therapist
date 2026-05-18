@@ -19,9 +19,9 @@ Project Recall is a sophisticated, privacy-first contextual memory system design
 
 ## Why This Project Matters
 
-In the world of AI, "feeling remembered" is the foundation of trust. However, traditional RAG (Retrieval-Augmented Generation) often falls into the "uncanny valley"—parroting sensitive facts back to the user in cold, awkward ways. 
+For any therapeutic relationship, trust is built on the feeling of being truly heard and remembered. In many AI systems, memory feels like a cold database lookup—an awkward "I remember you said X" that misses the emotional weight behind the words. Project Recall changes this by treating memory as a living context.
 
-Project Recall implements a **Multi-tiered Memory Architecture** that distinguishes between what someone is (core profile) and what someone is feeling (session themes). This creates a "Warm Opener" experience that mimics human memory: relevant, emotionally aware, and respectful of boundaries.
+Instead of just storing facts, the system captures the emotional resonance and unresolved themes of a conversation. This allows the AI to return to a new session with the warmth of a human professional who has spent time reflecting on your journey, ensuring that every "Welcome back" feels earned and authentic.
 
 ---
 
@@ -75,24 +75,42 @@ graph TD
 
 ---
 
-## ✨ Features
+## Core Features and Intelligence
 
-- **Privacy-First "Right to be Forgotten":** Flexible memory management allows for secure handling of therapeutic context.
-- **Sensitivity-Aware Retrieval:** High-sensitivity memories (e.g., trauma) are filtered out of casual re-engagement to prevent emotional distress.
-- **Dynamic Re-ranking:** Memories aren't just retrieved by similarity; they are scored based on **Recency**, **Importance**, and **Unresolved Themes**.
-- **Transparency & Control:** The CLI table view allows for a clear audit of what the system remembers, ensuring clinical accountability.
+### Privacy-First "Right to be Forgotten"
+The system is built with user agency at its core. Therapeutic data is exceptionally personal, and the system allows for granular control over what remains in the "long-term" memory. When a memory is flagged for removal, it is cleared across the entire storage layer, ensuring no residual context remains.
+
+### Sensitivity-Aware Retrieval
+Not every memory is suitable for a greeting. Recalling a minor success in work is helpful; recalling a deeply traumatic event during a casual check-in can be harmful. The system categorizes every extracted memory by sensitivity (Low, Medium, High). High-sensitivity memories are stored for continuity but are strictly gated and never used for automated re-engagement or casual session openers.
+
+### Dynamic Re-ranking and Retrieval
+Memory retrieval is more than just "similarity search." Project Recall uses a multi-factor scoring algorithm to determine what is most relevant:
+- **Importance (45%):** How critical was this moment to the user's journey?
+- **Open Loops (30%):** Is there a planned action or an unresolved conflict that needs follow-up?
+- **Actionability (25%):** Can this memory lead to a helpful, grounding conversation?
+
+### Ethical Re-engagement Logic
+The notification engine is designed to avoid the "retention hacks" of traditional apps. It only triggers when there is a clear therapeutic benefit—such as celebrating a milestone or following up on a stressful "open loop"—and it includes strict gates for crisis signals and notification fatigue.
 
 ---
 
-## Demo Screenshots
+## Demo Gallery
 
-| Memory Extraction & Table View | Session Opener Generation |
+| Ingestion & Memory Extraction | Memory Transparency Table |
 | :---: | :---: |
-| ![Memories](assets/Screenshot%20(281).png) | ![Opener](assets/Screenshot%20(282).png) |
+| ![Ingestion](assets/Screenshot%20(281).png) | ![Table 1](assets/Screenshot%20(282).png) |
 
-| Notification & Re-engagement Scenarios |
+| Memory Transparency Table Continued | Intelligent Session Opener |
+| :---: | :---: |
+| ![Table 2](assets/Screenshot%20(283).png) | ![Opener](assets/Screenshot%20(284).png) |
+
+| Re-engagement Scenarios | Safety and Decision Logic |
+| :---: | :---: |
+| ![Notifications](assets/Screenshot%20(285).png) | ![Logic 1](assets/Screenshot%20(286).png) |
+
+| Success & Final Validation |
 | :---: |
-| ![Notifications](assets/Screenshot%20(283).png) |
+| ![Logic 2](assets/Screenshot%20(287).png) |
 
 ---
 
