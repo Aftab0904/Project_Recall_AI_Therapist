@@ -168,9 +168,9 @@ flowchart TD
 | :---: | :---: |
 | ![Chat and Memory View](assets/Screenshot%20(270).png) | ![Control Panel](assets/Screenshot%20(271).png) |
 
-| Advanced Safety Audit |
-| :---: |
-| ![Safety Metrics](assets/Screenshot%20(274).png) |
+| Advanced Safety Audit | Personalized AI Greeting |
+| :---: | :---: |
+| ![Safety Metrics](assets/Screenshot%20(274).png) | ![AI Opener](assets/Screenshot%20(277).png) |
 
 ---
 
