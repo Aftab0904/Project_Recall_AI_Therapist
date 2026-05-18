@@ -150,7 +150,8 @@ flowchart TD
     O --> P[User can forget a memory]
 
     P --> F
-    P --> G
+    P --> G 
+```
 
 ## Features
 
