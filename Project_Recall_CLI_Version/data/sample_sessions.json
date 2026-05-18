@@ -1,0 +1,72 @@
+[
+    {
+        "session_id": "session_001",
+        "user_id": "demo_user",
+        "timestamp": "2024-05-10T10:00:00Z",
+        "theme": "Work anxiety before weekly team meetings",
+        "emotional_tone": "anxious",
+        "key_moments": [
+            "User mentioned heart racing before the Tuesday team sync.",
+            "User feels their contributions are overlooked.",
+            "Practiced box breathing for 5 minutes."
+        ],
+        "closing_state": "Slightly more grounded but still worried about next week.",
+        "crisis_signal": false
+    },
+    {
+        "session_id": "session_002",
+        "user_id": "demo_user",
+        "timestamp": "2024-05-12T14:30:00Z",
+        "theme": "Conflict with sister and boundary setting",
+        "emotional_tone": "frustrated",
+        "key_moments": [
+            "Sister borrowed car without asking.",
+            "User struggled to say 'no' when asked for money.",
+            "Discussed the 'I feel' statement technique."
+        ],
+        "closing_state": "Determined to have a conversation about boundaries.",
+        "crisis_signal": false
+    },
+    {
+        "session_id": "session_003",
+        "user_id": "demo_user",
+        "timestamp": "2024-05-15T09:00:00Z",
+        "theme": "Sleep issues after late-night rumination",
+        "emotional_tone": "exhausted",
+        "key_moments": [
+            "Only 4 hours of sleep last night.",
+            "Mind was racing about a mistake made in a report.",
+            "Agreed to try leaving the phone in another room."
+        ],
+        "closing_state": "Tired but hopeful that the phone strategy will help.",
+        "crisis_signal": false
+    },
+    {
+        "session_id": "session_004",
+        "user_id": "demo_user",
+        "timestamp": "2024-05-18T16:00:00Z",
+        "theme": "Positive progress from journaling",
+        "emotional_tone": "hopeful",
+        "key_moments": [
+            "Journaled every day for 5 days.",
+            "Noticed a pattern of feeling better after writing down 3 gratitudes.",
+            "Feeling more optimistic about the month ahead."
+        ],
+        "closing_state": "Proud of the consistency.",
+        "crisis_signal": false
+    },
+    {
+        "session_id": "session_005",
+        "user_id": "demo_user",
+        "timestamp": "2024-05-20T11:00:00Z",
+        "theme": "Open loop: planned conversation with manager",
+        "emotional_tone": "determined",
+        "key_moments": [
+            "Meeting with manager scheduled for next Tuesday.",
+            "Prepared a list of achievements to discuss.",
+            "Practiced the opening sentence: 'I'd like to discuss my growth and compensation.'"
+        ],
+        "closing_state": "Nervous but prepared.",
+        "crisis_signal": false
+    }
+]
