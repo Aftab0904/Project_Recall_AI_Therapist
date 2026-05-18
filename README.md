@@ -1,84 +1,156 @@
-# Project Recall: Contextual Memory & Re-engagement System
+# Project Recall
 
-Project Recall is a sophisticated, privacy-first contextual memory system designed to bridge the gap between robotic data retrieval and genuine human-centric interaction. Built for high-empathy applications, it utilizes an advanced agentic architecture to ensure users feel understood and remembered without compromising safety or privacy.
+Project Recall is an exploratory case study focused on the development of an AI therapist. 
 
----
+> Help the AI remember what matters from past sessions, use that memory gently, and bring users back without sounding robotic, creepy, or unsafe.
 
-## Key Skills & Tech Stack
-
-| Category | Technologies |
-| :--- | :--- |
-| Agentic Framework | LangGraph, LangChain |
-| Core AI / LLM | DeepSeek-R1 (via Ollama/OpenRouter), LLM-based Safety Filtering |
-| Retrieval Architecture | Advanced RAG, Semantic Search, Custom Re-ranking Algorithms |
-| Backend Orchestration | Python 3.11, FastAPI, Pydantic v2 |
-| Database & Storage | ChromaDB (Vector Store), SQLAlchemy (SQLite - Metadata) |
-| Frontend Interaction | React 19, TypeScript, Vite, Tailwind CSS, Lucide Icons |
-| Testing & Quality | Pytest, Pytest-asyncio |
+This project is not a generic chatbot. It is a focused memory system that shows how an AI therapy product could extract useful context from previous sessions, store it safely, retrieve only what is relevant, and generate a warm session-opening message for a returning user.
 
 ---
 
-## Why This Project Matters
+## The Problem
 
-In the world of AI, "feeling remembered" is the foundation of trust. However, traditional RAG (Retrieval-Augmented Generation) often falls into the "uncanny valley"—parroting sensitive facts back to the user in cold, awkward ways. 
+A therapy conversation is not like a normal support chat.
 
-Project Recall implements a Multi-tiered Memory Architecture that distinguishes between what someone is (core profile) and what someone is feeling (session themes). This creates a "Warm Opener" experience that mimics human memory: relevant, emotionally aware, and respectful of boundaries.
+If a user comes back after a few days, they do not want the AI to act like a stranger. They also do not want the AI to repeat sensitive details back at them in a cold or invasive way.
+
+The original case study describes three product problems:
+
+1. Around 40 percent of returning users feel the AI does not remember previous sessions.
+2. Generic push notifications have low engagement.
+3. Many users leave before the session reaches meaningful depth.
+
+A normal AI assistant might solve this by sending the full chat history back into the model. That is not a good solution here.
+
+It can be slow, expensive, noisy, and unsafe. More importantly, mental health conversations contain sensitive details. A good memory system should not remember everything. It should remember carefully.
+
+---
+
+## The Solution
+
+Project Recall uses a lightweight memory architecture that sits between raw session transcripts and the AI response.
+
+Instead of storing and replaying entire conversations, the system:
+
+1. Ingests a small set of simulated therapy session transcripts.
+2. Extracts structured memory summaries from each session.
+3. Separates long-term patterns from short-term session details.
+4. Filters out unsafe or overly sensitive memories.
+5. Stores safe memories in both a relational database and a vector store.
+6. Retrieves only the most relevant safe memories at the start of a new session.
+7. Generates a warm opening message that references the past naturally.
+8. Allows the user to see and forget what the AI remembers.
+9. Uses rule-based logic to decide when a re-engagement notification should be sent.
+
+The goal is not to make the AI sound clever. The goal is to make it feel considerate.
+
+---
+
+## What This Project Demonstrates
+
+This project shows how I would approach memory in a mental-health-adjacent AI product.
+
+It focuses on:
+
+- Memory extraction
+- Retrieval-augmented generation
+- Safety filtering
+- User control
+- Notification logic
+- Transparent UX
+- Practical backend architecture
+- Clear product tradeoffs
+
+It is intentionally scoped as a prototype, but the architecture is designed in a way that could grow into a production system.
+
+---
+
+## Tech Stack
+
+### Backend
+
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Pydantic](https://img.shields.io/badge/Pydantic-v2-E92063?style=for-the-badge)
+![LangGraph](https://img.shields.io/badge/LangGraph-Orchestration-1C3C3C?style=for-the-badge)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-SQLite-D71F00?style=for-the-badge)
+![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_Store-5B4BDB?style=for-the-badge)
+
+### AI and Retrieval
+
+![DeepSeek](https://img.shields.io/badge/DeepSeek-R1-111827?style=for-the-badge)
+![OpenRouter](https://img.shields.io/badge/OpenRouter-API-6D28D9?style=for-the-badge)
+![Ollama](https://img.shields.io/badge/Ollama-Local_Optional-000000?style=for-the-badge)
+![RAG](https://img.shields.io/badge/Memory_RAG-Lite-2563EB?style=for-the-badge)
+
+### Frontend
+
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-Frontend-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-Build_Tool-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Lucide](https://img.shields.io/badge/Lucide-Icons-111827?style=for-the-badge)
+
+### Testing
+
+![Pytest](https://img.shields.io/badge/Pytest-Tests-0A9EDC?style=for-the-badge&logo=pytest&logoColor=white)
+
+---
+
+## Simple Explanation
+
+Imagine a person talked to the AI last week about feeling anxious before work meetings.
+
+A bad AI memory system might say:
+
+> Your previous session theme was work anxiety. Emotional tone: anxious. Status unresolved.
+
+That sounds like a database report.
+
+A better AI memory system says:
+
+> Welcome back. Last time, we touched on how work meetings had been feeling heavy, especially around taking on too much. Would it feel useful to check in on that today, or is something else more present?
+
+That is the difference this project is trying to demonstrate.
+
+The system does not just retrieve memory. It decides what is safe to remember, what is useful to bring up, and how to say it in a human way.
 
 ---
 
 ## System Architecture
 
-The following diagram shows how the system processes information and remembers key details for future conversations.
+This diagram shows the full flow in simple terms.
 
 ```mermaid
-graph TD
-    %% Node Definitions
-    Input[New User Message]
-    
-    subgraph Processing [Step 1: Understanding & Safety]
-        LangGraph{LangGraph Orchestrator}
-        Safety[Safety Filter & Sensitivity Audit]
-    end
+flowchart TD
+    A[Past therapy sessions] --> B[Memory extractor]
 
-    subgraph Memory [Step 2: Storing Memories]
-        Extraction[Memory Extraction Agent]
-        SQL[(SQLite: Metadata & Control)]
-        Chroma[(ChromaDB: Vector Store)]
-    end
+    B --> C{Is this safe to remember?}
 
-    subgraph Retrieval [Step 3: Remembering & Greeting]
-        Search[Semantic Search & RAG]
-        Ranker[Custom Re-ranking Logic]
-        Greeting[Warm Opener Generation]
-    end
+    C -->|No| D[Do not use for personalization]
+    C -->|Yes| E[Create a short memory summary]
 
-    Output[Personalized Welcome Message]
+    E --> F[(SQLite metadata store)]
+    E --> G[(ChromaDB vector store)]
 
-    %% Connections
-    Input --> LangGraph
-    LangGraph --> Safety
-    Safety --> Extraction
-    Extraction --> SQL
-    Extraction --> Chroma
-    
-    SQL --> Search
-    Chroma --> Search
-    Search --> Ranker
-    Ranker --> Greeting
-    Greeting --> Output
+    F --> H[Memory retriever]
+    G --> H
 
-    %% Styling
-    style LangGraph fill:#f9f,stroke:#333,stroke-width:2px,color:#000
-    style Safety fill:#ff9,stroke:#333,stroke-width:2px,color:#000
-    style Extraction fill:#9f9,stroke:#333,stroke-width:2px,color:#000
-    style SQL fill:#9ff,stroke:#333,stroke-width:2px,color:#000
-    style Chroma fill:#9ff,stroke:#333,stroke-width:2px,color:#000
-    style Search fill:#f99,stroke:#333,stroke-width:2px,color:#000
-    style Ranker fill:#f99,stroke:#333,stroke-width:2px,color:#000
-    style Greeting fill:#bbf,stroke:#333,stroke-width:2px,color:#000
-```
+    H --> I{Should this memory be used now?}
 
----
+    I -->|No| J[Ignore for this session]
+    I -->|Yes| K[Send only 2 or 3 safe memories to the LLM]
+
+    K --> L[Generate warm session opener]
+
+    F --> M[Notification rule engine]
+    M --> N[Gentle re-engagement notification]
+
+    F --> O[User memory panel]
+    O --> P[User can forget a memory]
+
+    P --> F
+    P --> G
 
 ## Features
 
