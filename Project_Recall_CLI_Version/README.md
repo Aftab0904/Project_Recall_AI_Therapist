@@ -1,22 +1,100 @@
 # Project Recall - CLI Version
 
-> **One-line thesis:** This prototype remembers only what is useful for care continuity, retrieves only what is safe and relevant, and uses memory to make the next session feel human without turning emotional vulnerability into a retention lever.
+Project Recall is a sophisticated, privacy-first contextual memory system designed to bridge the gap between robotic data retrieval and genuine human-centric interaction. This CLI version focuses on the core intelligence of therapeutic continuity, ensuring that AI-driven support feels as natural and safe as a conversation with a long-term mentor.
 
-## Overview
-Project Recall CLI is a minimal but functional prototype for an AI therapist memory and re-engagement system. It demonstrates how to handle sensitive therapeutic context using a privacy-aware, structured memory architecture.
+---
 
-## What this Prototype Demonstrates
-- **Structured Extraction:** Moving away from raw transcripts to summarized, categorized memories.
-- **Privacy Controls:** Handling sensitivity levels and "do not use for push" flags.
-- **Weighted Retrieval:** A scoring algorithm that prioritizes importance, recency, and open loops.
-- **Human-Centric UX:** Generating warm, non-robotic openers under 80 words.
+## Key Skills & Tech Stack
 
-## Tech Stack
-- **Language:** Python 3.10+
-- **CLI Framework:** Typer
-- **Data Validation:** Pydantic v2
-- **Terminal UI:** Rich
-- **LLM Client:** OpenRouter (Mock mode included)
+| Category | Technologies |
+| :--- | :--- |
+| **Logic & CLI** | **Python 3.10+**, **Typer** |
+| **Data Integrity** | **Pydantic v2**, JSON-based Local Storage |
+| **AI Orchestration** | **OpenRouter**, **DeepSeek-R1**, LLM-based Memory Extraction |
+| **Memory Strategy** | **Advanced RAG**, Weighted Re-ranking, Contextual Retrieval |
+| **UX & Presentation** | **Rich** (Terminal UI), Custom Emotional Tone Analysis |
+| **Quality & Safety** | Safety-Aware Filtering, Privacy Gates, CRISIS-signal Detection |
+
+---
+
+## Why This Project Matters
+
+In the world of AI, "feeling remembered" is the foundation of trust. However, traditional RAG (Retrieval-Augmented Generation) often falls into the "uncanny valley"—parroting sensitive facts back to the user in cold, awkward ways. 
+
+Project Recall implements a **Multi-tiered Memory Architecture** that distinguishes between what someone is (core profile) and what someone is feeling (session themes). This creates a "Warm Opener" experience that mimics human memory: relevant, emotionally aware, and respectful of boundaries.
+
+---
+
+## System Architecture
+
+The following diagram shows how the system processes information and remembers key details for future conversations.
+
+```mermaid
+graph TD
+    %% Node Definitions
+    Input[Session Data Ingest]
+    
+    subgraph Analysis [Step 1: Understanding & Extraction]
+        LLM[LLM Extraction Agent]
+        Safety[Safety & Privacy Gates]
+    end
+
+    subgraph Storage [Step 2: Secure Local Storage]
+        JSON[(JSON Memory Store)]
+        Validation[Pydantic Validation]
+    end
+
+    subgraph Intelligence [Step 3: Remembering & Greeting]
+        Search[Contextual Retrieval]
+        Ranker[Weighted Re-ranking Score]
+        Opener[Warm Opener Generation]
+    end
+
+    Output[Empathetic Greeting]
+
+    %% Connections
+    Input --> LLM
+    LLM --> Safety
+    Safety --> Validation
+    Validation --> JSON
+    
+    JSON --> Search
+    Search --> Ranker
+    Ranker --> Opener
+    Opener --> Output
+
+    %% Styling
+    style LLM fill:#f9f,stroke:#333,stroke-width:2px,color:#000
+    style Safety fill:#ff9,stroke:#333,stroke-width:2px,color:#000
+    style Validation fill:#9f9,stroke:#333,stroke-width:2px,color:#000
+    style JSON fill:#9ff,stroke:#333,stroke-width:2px,color:#000
+    style Search fill:#f99,stroke:#333,stroke-width:2px,color:#000
+    style Ranker fill:#f99,stroke:#333,stroke-width:2px,color:#000
+    style Opener fill:#bbf,stroke:#333,stroke-width:2px,color:#000
+```
+
+---
+
+## ✨ Features
+
+- **Privacy-First "Right to be Forgotten":** Flexible memory management allows for secure handling of therapeutic context.
+- **Sensitivity-Aware Retrieval:** High-sensitivity memories (e.g., trauma) are filtered out of casual re-engagement to prevent emotional distress.
+- **Dynamic Re-ranking:** Memories aren't just retrieved by similarity; they are scored based on **Recency**, **Importance**, and **Unresolved Themes**.
+- **Transparency & Control:** The CLI table view allows for a clear audit of what the system remembers, ensuring clinical accountability.
+
+---
+
+## Demo Screenshots
+
+| Memory Extraction & Table View | Session Opener Generation |
+| :---: | :---: |
+| ![Memories](assets/Screenshot%20(281).png) | ![Opener](assets/Screenshot%20(282).png) |
+
+| Notification & Re-engagement Scenarios |
+| :---: |
+| ![Notifications](assets/Screenshot%20(283).png) |
+
+---
 
 ## Setup Instructions
 
@@ -29,7 +107,6 @@ Project Recall CLI is a minimal but functional prototype for an AI therapist mem
    ```bash
    python -m venv .venv
    .\.venv\Scripts\activate  # Windows
-   source .venv/bin/activate  # macOS/Linux
    ```
 
 3. **Install Dependencies:**
@@ -37,30 +114,8 @@ Project Recall CLI is a minimal but functional prototype for an AI therapist mem
    pip install -r requirements.txt
    ```
 
-4. **Environment Variables:**
-   Create a `.env` file based on `.env.example`. By default, `MOCK_LLM=true` is set so no API key is required.
-
 ## How to Run
 Run the full end-to-end demo to see the system in action:
 ```bash
 python -m app.cli demo
 ```
-
-### Individual Commands:
-- **Ingest Sessions:** `python -m app.cli ingest data/sample_sessions.json`
-- **Show Memories:** `python -m app.cli memories --user demo_user`
-- **Generate Opener:** `python -m app.cli open-session --user demo_user`
-- **Run Notifications:** `python -m app.cli notifications --user demo_user`
-
-## Demo Screenshots
-Here is how the CLI version looks in action:
-
-![CLI Demo 1](../assets/Screenshot%20(270).png)
-![CLI Demo 2](../assets/Screenshot%20(271).png)
-![CLI Demo 3](../assets/Screenshot%20(274).png)
-
-## Architecture & Design
-Refer to `design_doc.md` for the retrieval logic details and `ethics.md` for the risk analysis.
-
-## Why CLI Only?
-This prototype focuses on the **logic and safety** of memory management. By removing the complexity of a web frontend or LangGraph, we maintain a clean, high-signal codebase that demonstrates the core engineering challenges of therapeutic AI memory.
