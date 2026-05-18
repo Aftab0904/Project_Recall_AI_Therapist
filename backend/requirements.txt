@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+pydantic>=2.0
+pydantic-settings
+langgraph
+chromadb
+httpx
+python-dotenv
+pytest
+pytest-asyncio
+sqlalchemy
+aiosqlite
+openai
+langchain-openai
+langchain-core
+langchain-community
