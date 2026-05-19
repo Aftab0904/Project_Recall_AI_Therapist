@@ -1,0 +1,72 @@
+[
+  {
+    "session_id": "s1",
+    "user_id": "demo_user",
+    "timestamp": "2026-05-10T10:00:00",
+    "theme": "Work anxiety",
+    "emotional_tone": "anxious",
+    "key_moments": [
+      "User feels tense before weekly team meetings.",
+      "User worries their manager may judge their ideas.",
+      "User practiced a short grounding exercise."
+    ],
+    "closing_state": "calmer but still worried",
+    "crisis_signal": false
+  },
+  {
+    "session_id": "s2",
+    "user_id": "demo_user",
+    "timestamp": "2026-05-12T14:30:00",
+    "theme": "Work-life boundaries",
+    "emotional_tone": "overwhelmed",
+    "key_moments": [
+      "User feels work messages spill into evenings.",
+      "User wants more separation between work and personal time.",
+      "User considered setting a shutdown routine after work."
+    ],
+    "closing_state": "motivated but unsure",
+    "crisis_signal": false
+  },
+  {
+    "session_id": "s3",
+    "user_id": "demo_user",
+    "timestamp": "2026-05-14T09:15:00",
+    "theme": "Sleep and rumination",
+    "emotional_tone": "tired",
+    "key_moments": [
+      "User wakes around 4 AM and starts replaying work conversations.",
+      "User noticed late-night phone use makes sleep worse.",
+      "User agreed to try a short wind-down routine."
+    ],
+    "closing_state": "reflective",
+    "crisis_signal": false
+  },
+  {
+    "session_id": "s4",
+    "user_id": "demo_user",
+    "timestamp": "2026-05-16T16:00:00",
+    "theme": "Family boundaries",
+    "emotional_tone": "conflicted",
+    "key_moments": [
+      "User wants to set a calmer boundary with their sister.",
+      "User worries about sounding selfish.",
+      "User drafted one sentence they could say."
+    ],
+    "closing_state": "nervous but prepared",
+    "crisis_signal": false
+  },
+  {
+    "session_id": "s5",
+    "user_id": "demo_user",
+    "timestamp": "2026-05-18T11:00:00",
+    "theme": "Positive coping progress",
+    "emotional_tone": "hopeful",
+    "key_moments": [
+      "User felt better after two morning walks.",
+      "User said journaling helped organize their thoughts.",
+      "User wants to continue small routines instead of big changes."
+    ],
+    "closing_state": "encouraged",
+    "crisis_signal": false
+  }
+]

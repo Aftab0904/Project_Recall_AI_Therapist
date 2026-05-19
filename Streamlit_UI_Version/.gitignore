@@ -1,0 +1,14 @@
+# Dependencies
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Local Storage
+outputs/memory_store.json
+
+# Environment
+.env
+
+# Streamlit
+.streamlit/
