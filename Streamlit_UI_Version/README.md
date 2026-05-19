@@ -1,4 +1,4 @@
-# Mentra Recall: AI Therapy Memory System (Streamlit Edition)
+# Project Recall: AI Therapy Memory System
 
 This is the Streamlit-powered prototype of **Project Recall**, an exploratory system designed for AI mental-health companions. 
 
