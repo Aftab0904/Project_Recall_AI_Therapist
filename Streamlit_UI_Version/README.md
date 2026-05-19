@@ -14,10 +14,46 @@ In therapy, being remembered is the foundation of trust. If an AI therapist trea
 ## Architecture Overview
 The system follows a modular RAG (Retrieval-Augmented Generation) pipeline:
 
+```mermaid
+graph TD
+    User((User)) -->|Interacts| UI[streamlit_app.py]
+    UI -->|Ingests| ME[memory_extractor.py]
+    ME -->|Calls| LLM[llm_client.py]
+    ME -->|Stores| MS[memory_store.py]
+    MS -->|Saves| JSON[(memory_store.json)]
+    
+    UI -->|Queries| RT[retrieval.py]
+    RT -->|Reads| MS
+    
+    UI -->|Generates| LLM
+    LLM -->|Uses| PR[prompts.py]
+    
+    UI -->|Evaluates| EV[evaluation.py]
+    UI -->|Triggers| NT[notifications.py]
+```
+
 1.  **Durable Extraction**: Post-session, the system identifies stress triggers, coping strategies, and personal goals.
 2.  **Fingerprint Deduplication**: Uses SHA-256 hashing to ensure the AI doesn't remember the same thing twice.
 3.  **Contextual Retrieval**: A weighted scoring engine (Overlap + Importance + Recency + Open Loops) finds the exact context needed for the current conversation.
 4.  **Warm Generation**: A multi-prompt system that distinguishes between **Session Openers** (greetings) and **Chat Responses** (active support).
+
+---
+
+## Technical File Mapping
+Each file in the `app/` directory serves a specific role in the RAG lifecycle:
+
+| File | Purpose |
+| :--- | :--- |
+| `streamlit_app.py` | **Main Entry Point**. Handles the UI layout, multi-tab navigation, and session state management. |
+| `app/memory_extractor.py` | **The Brain**. Processes raw transcripts and converts them into structured memory objects using the LLM. |
+| `app/memory_store.py` | **The Vault**. Handles fingerprint-based deduplication and persistent storage of memories to JSON. |
+| `app/retrieval.py` | **The Librarian**. Implements the weighted keyword scoring algorithm to find relevant memories. |
+| `app/llm_client.py` | **The Bridge**. Manages communication with the OpenRouter API and provides deterministic fallbacks. |
+| `app/prompts.py` | **The Voice**. Contains all the clinical and conversational instruction templates for the AI. |
+| `app/evaluation.py` | **The Critic**. Runs the 5-point evaluation suite (Coverage, Recall, Warmth, Safety, Latency). |
+| `app/notifications.py` | **The Connector**. Implements rule-based logic for re-engagement based on therapeutic signals. |
+| `app/schemas.py` | **The Blueprint**. Defines the Pydantic models used to enforce data integrity across the system. |
+| `app/utils.py` | **The Helper**. Provides SHA-256 hashing for deduplication and timestamp formatting. |
 
 ---
 
