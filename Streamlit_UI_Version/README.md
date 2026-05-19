@@ -76,6 +76,87 @@ Each file in the `app/` directory serves a specific role in the RAG lifecycle:
 
 ---
 
+## Step-by-Step Interactive Guide
+
+This guide explains how to use the prototype and what happens "under the hood" in the code at each step.
+
+### 1. Ingest Sample Sessions
+*   **Action**: Click **"Ingest sample sessions"** in the sidebar.
+*   **Behind the Scenes**: 
+    *   `streamlit_app.py` reads the raw data from `data/sample_sessions.json`.
+    *   It triggers `app/memory_extractor.py`, which sends the transcripts to the LLM (`app/llm_client.py`).
+    *   The extracted memories are then sent to `app/memory_store.py`, where they are hashed for deduplication and saved to `outputs/memory_store.json`.
+
+### 2. View Session History
+*   **Action**: Click the **"Session History"** tab.
+*   **Behind the Scenes**: 
+    *   `streamlit_app.py` pulls the raw transcripts directly from `data/sample_sessions.json` and displays them as cards. This represents the "Raw Data" layer before any AI processing.
+
+### 3. Inspect Memory Store
+*   **Action**: Click the **"Memory Store"** tab.
+*   **Behind the Scenes**: 
+    *   `streamlit_app.py` calls `app/memory_store.py` to fetch all unique memories.
+    *   The UI displays these in a table, showing you exactly how the AI has "distilled" the raw transcripts into structured insights.
+
+### 4. Generate Session Opener
+*   **Action**: Click the **"Session Opener"** tab and press **"Generate session opener"**.
+*   **Behind the Scenes**: 
+    *   `app/retrieval.py` triggers its weighted scoring algorithm to find the top 2 most important/recent memories.
+    *   These memories are inserted into a prompt template from `app/prompts.py`.
+    *   The LLM (`app/llm_client.py`) generates a warm, human greeting.
+
+### 5. Chat Simulation
+*   **Action**: Click the **"Chat Simulation"** tab and type a question (e.g., *"I'm stressed about work"*).
+*   **Behind the Scenes**: 
+    *   `app/retrieval.py` performs a keyword-based search using your current message + your recent chat history to find relevant context.
+    *   `streamlit_app.py` passes this context and the conversation history to the LLM.
+    *   The AI provides a specific, helpful answer instead of a generic greeting.
+
+### 6. Review Evaluation
+*   **Action**: Click the **"Evaluation"** tab.
+*   **Behind the Scenes**: 
+    *   `app/evaluation.py` runs a suite of heuristic checks. 
+    *   It calculates **Extraction Coverage** (did we find 6 themes?), **Recall @ 3** (did the search work?), and **Human Recall Score** (is the AI warm and specific?).
+    *   It also measures the **Latency** (time taken) to ensure the system is fast enough for real-world use.
+
+---
+
+## User Interaction Flow
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant UI as streamlit_app.py
+    participant LOG as Core Logic (.py files)
+    participant DB as JSON Storage
+
+    U->>UI: 1. Click Ingest
+    UI->>LOG: memory_extractor.py
+    LOG->>DB: save to memory_store.json
+    UI-->>U: Sidebar Success Message
+
+    U->>UI: 2. Click Session Opener
+    UI->>LOG: retrieval.py (find memories)
+    LOG->>UI: return top memories + scores
+    UI->>LOG: llm_client.py (generate)
+    LOG-->>UI: return warm greeting
+    UI-->>U: Show AI greeting
+
+    U->>UI: 3. Type in Chat
+    UI->>LOG: retrieval.py (context search)
+    LOG-->>UI: return relevant memories
+    UI->>LOG: llm_client.py (answer query)
+    LOG-->>UI: return helpful response
+    UI-->>U: Show Chat Bubbles
+
+    U->>UI: 4. Click Evaluation
+    UI->>LOG: evaluation.py (calculate scores)
+    LOG-->>UI: return metrics table
+    UI-->>U: Show Scores (100%)
+```
+
+---
+
 ## Key Features
 - **Privacy-First Storage**: We store structured summaries, not raw audio or tangents.
 - **Explainable AI**: Every response shows the exact memories used and their retrieval scores.
